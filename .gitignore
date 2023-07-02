@@ -1,5 +1,6 @@
 */__pycache__
 *.pyc
+.history
 .DS_Store
 node_modules/
 /dist/
@@ -27,3 +28,6 @@ ParserCTPFlow
 *.con
 *.dmb
 *.dsb
+
+# test demo data
+demos/*/*.log

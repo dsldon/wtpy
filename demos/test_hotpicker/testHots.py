@@ -36,8 +36,8 @@ def rebuild_hot_rules():
     picker.set_cacher(cacher)
 
     sDate = datetime.datetime.strptime("2019-01-01", '%Y-%m-%d')
-    eDate = datetime.datetime.strptime("2021-08-21", '%Y-%m-%d') # 可以设置为None，None则自动设置为当前日期
-    hotRules,secRules = picker.execute_rebuild(sDate, eDate, wait=True)
+    # eDate = datetime.datetime.strptime("2021-08-21", '%Y-%m-%d') # 可以设置为None，None则自动设置为当前日期
+    hotRules,secRules = picker.execute_rebuild(sDate, None, wait=True)
     print(hotRules)
     print(secRules)
 
@@ -59,7 +59,7 @@ def daily_hot_rules():
     # picker.set_mail_notifier(notifier)
 
     eDate = datetime.datetime.strptime("2016-03-01", '%Y-%m-%d') # 可以设置为None，None则自动设置为当前日期
-    picker.execute_increment(eDate)
+    picker.execute_increment()
 
-rebuild_hot_rules()
+daily_hot_rules()
 input("press enter key to exit\n")
