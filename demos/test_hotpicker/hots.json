@@ -9567,6 +9567,13 @@
                 "newclose": 5449.0,
                 "oldclose": 5431.0,
                 "to": "ag2308"
+            },
+            {
+                "date": 20230704,
+                "from": "ag2308",
+                "newclose": 5531.0,
+                "oldclose": 5501.0,
+                "to": "ag2312"
             }
         ],
         "al": [
