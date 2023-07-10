@@ -31,3 +31,5 @@ ParserCTPFlow
 
 # test demo data
 demos/*/*.log
+demos/*/*.csv
+*generated*

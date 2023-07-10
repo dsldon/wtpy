@@ -108,8 +108,7 @@ class StraDualThrust(BaseCtaStrategy):
         elif curPos > 0:
             if lowpx <= lower_bound:
                 context.stra_exit_long(code, 1*trdUnit, 'exitlong')
-                # context.stra_log_text("向下突破%.2f<=%.2f，多仓出场" % (lowpx, lower_bound))
-                #raise Exception("except on purpose")
+                context.stra_log_text("向下突破%.2f<=%.2f，多仓出场" % (lowpx, lower_bound))
                 return
         else:
             if highpx >= upper_bound and not self.__is_stk__:
