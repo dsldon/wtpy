@@ -11,6 +11,7 @@ class SkyGardenStra(BaseCtaStrategy):
         BaseCtaStrategy.__init__(self, name)
 
         self.__period__ = period
+        self.__day_bar_cnt__ = 3
         self.__bar_cnt__ = barCnt
         self.__code__ = code
         self.__margin_rate__ = margin_rate # 保证金比率
@@ -22,34 +23,40 @@ class SkyGardenStra(BaseCtaStrategy):
 
     def on_init(self, context:CtaContext):
         code = self.__code__    #品种代码
-
+        # 取日线
         context.stra_get_bars(code, 'd1', self.__bar_cnt__, isMain=False)
+        # 取分钟线
         context.stra_get_bars(code, self.__period__, self.__bar_cnt__, isMain = True)
         context.stra_log_text("SkyGardenStra inited")
+        # 获得合约乘数
         pInfo = context.stra_get_comminfo(code)
         self.__volscale__ = pInfo.volscale
+        # TODO:可以通过持仓查看是否需要再报单
+        return
 
 
     def on_session_begin(self, context:CtaContext, curTDate:int):
         self.new_day = 1
-
         self.today_entry = 0
+        return
+
 
     def on_calculate(self, context:CtaContext):
         code = self.__code__    #品种代码
-
         trdUnit = 1
-
-        theCode = code
-        df_bars = context.stra_get_bars(code,'d1', self.__bar_cnt__, isMain=False)
+        df_bars = context.stra_get_bars(code,'d1', self.__day_bar_cnt__, isMain=False)
         closes = df_bars.closes
 
         # 获取昨日收盘价
         last_day_close = closes[-1]
-        df_bars = context.stra_get_bars(theCode, self.__period__, self.__bar_cnt__, isMain = True)
+        # 拿分钟K线
+        df_bars = context.stra_get_bars(code, self.__period__, self.__bar_cnt__, isMain = True)
         # 尾盘清仓
+        # 当前仓位
         curPos = context.stra_get_position(code)
+        # 当前最新价
         curPrice = context.stra_get_price(code)
+        # 当前时间
         curTime = context.stra_get_time()
         bCleared = False
 
@@ -70,24 +77,32 @@ class SkyGardenStra(BaseCtaStrategy):
             self.new_day = 0
 
         #把策略参数读进来，作为临时变量，方便引用
+        # 保证金比例
         margin_rate = self.__margin_rate__
+        # 每次使用的资金比率
         money_pct = self.__money_pct__
+        # 合约乘数
         volscale = self.__volscale__
+        # 初始资金
         capital = self.__capital__
+        # 每手交易对应的商品数额
         trdUnit_price = volscale * margin_rate * curPrice
+        # 初始资金 + 动态权益
         cur_money = capital + context.stra_get_fund_data(0)
+        # 当前仓位
         curPos = context.stra_get_position(code)/trdUnit
 
         if curPos == 0 and self.today_entry == 0:
+            # 当前没有持仓 且 今天没有交易
             if curPrice > self.cur_high and self.cur_open > last_day_close*1.01:
+                # 当前价 > 最高价
                 context.stra_enter_long(code, math.floor(cur_money*money_pct/trdUnit_price),'enterlong')
-                context.stra_log_text('当前价格：%.2f > 昨日收盘价：%.2f*1.01，做多%s手' % (curPrice, last_day_close, \
-                                                                    math.floor(cur_money*money_pct/trdUnit_price)))
+                context.stra_log_text('当前价格：%.2f > 昨日收盘价：%.2f*1.01，做多%s手' % (curPrice, last_day_close, math.floor(cur_money*money_pct/trdUnit_price)))
                 self.today_entry = 1
                 return
             if curPrice < self.cur_low and curPrice < last_day_close * 0.99:
+                # 
                 context.stra_enter_short(code, math.floor(cur_money*money_pct/trdUnit_price),'entershort')
-                context.stra_log_text('当前价格:%.2f < 昨日收盘价：%.2f * 0.99，做空%s手' % (curPrice, self.cur_low, \
-                                                                        math.floor(cur_money*money_pct/trdUnit_price)))
+                context.stra_log_text('当前价格:%.2f < 昨日收盘价：%.2f * 0.99，做空%s手' % (curPrice, self.cur_low, math.floor(cur_money*money_pct/trdUnit_price)))
                 self.today_entry = 1
                 return

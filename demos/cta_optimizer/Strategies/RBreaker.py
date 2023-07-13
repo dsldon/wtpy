@@ -3,7 +3,7 @@ from wtpy import CtaContext
 
 class StraRBreaker(BaseCtaStrategy):
 
-    def __init__(self, name:str, code:str, barCnt:int, period:str, N:int, a:float, b:float, c:float, d:float, cleartimes:list):
+    def __init__(self, name:str, code:str, period:str, N:int=30, a:float=0.35, b:float=1.07, c:float=0.07, d:float=0.25, cleartimes:list=[[1450,1515],[2250,2300]]):
         BaseCtaStrategy.__init__(self, name)
 
         self.__N__ = N
@@ -13,13 +13,12 @@ class StraRBreaker(BaseCtaStrategy):
         self.__d__ = d
 
         self.__period__ = period
-        self.__bar_cnt__ = barCnt
         self.__code__ = code
         self.__cleartimes__ = cleartimes    # 尾盘清仓需要多个时间区间，因为夜盘和白盘都要清仓，格式如[[1455,1515],[2255,2300]]
 
     def on_init(self, context:CtaContext):
         code = self.__code__
-        context.stra_get_bars(code, self.__period__, self.__bar_cnt__, isMain = True)
+        context.stra_get_bars(code, self.__period__, self.__N__, isMain = True)   
         context.stra_log_text("R-Breaker inited")
 
     
@@ -42,7 +41,7 @@ class StraRBreaker(BaseCtaStrategy):
         if bCleared:
             return
 
-        df_bars = context.stra_get_bars(code, self.__period__, self.__bar_cnt__, isMain = True)
+        df_bars = context.stra_get_bars(code, self.__period__, self.__N__, isMain = True)
         N = self.__N__
         a = self.__a__
         b = self.__b__

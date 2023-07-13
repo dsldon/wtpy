@@ -2142,16 +2142,6 @@
             "minlimitqty": 1,
             "minmarketqty": 0
         },
-        "ZC307": {
-            "name": "郑煤307",
-            "code": "ZC307",
-            "exchg": "CZCE",
-            "product": "ZC",
-            "maxlimitqty": 50,
-            "maxmarketqty": 0,
-            "minlimitqty": 1,
-            "minmarketqty": 0
-        },
         "ZC308": {
             "name": "郑煤308",
             "code": "ZC308",
@@ -2255,6 +2245,16 @@
         "ZC406": {
             "name": "郑煤406",
             "code": "ZC406",
+            "exchg": "CZCE",
+            "product": "ZC",
+            "maxlimitqty": 50,
+            "maxmarketqty": 0,
+            "minlimitqty": 1,
+            "minmarketqty": 0
+        },
+        "ZC407": {
+            "name": "郑煤407",
+            "code": "ZC407",
             "exchg": "CZCE",
             "product": "ZC",
             "maxlimitqty": 50,

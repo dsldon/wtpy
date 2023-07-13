@@ -12,7 +12,9 @@ def runBaseOptimizer():
     # 添加固定参数
     optimizer.add_fixed_param(name="barCnt", val=30)
     optimizer.add_fixed_param(name="period", val="m5")
-    optimizer.add_fixed_param(name="code", val="DCE.i.2309")
+    # optimizer.add_fixed_param(name="code", val="DCE.i.2309")
+    # optimizer.add_fixed_param(name="code", val="DCE.y.2309")
+    optimizer.add_fixed_param(name="code", val="DCE.c.2309")
     optimizer.add_fixed_param(name="slTicks", val=0)
     optimizer.add_fixed_param(name="spTicks", val=0)
 
@@ -47,7 +49,7 @@ def runStopAllOptimizer():
 
     # 配置回测环境，主要是将直接回测的一些参数通过这种方式动态传递，优化器中会在每个子进程动态构造回测引擎
     optimizer.config_backtest_env(deps_dir='../common/', cfgfile='configbt.yaml', storage_type="wtp", storage_path="../FUT_Data/")
-    optimizer.config_backtest_time(start_time=202306100900, end_time=202307100900)
+    optimizer.config_backtest_time(start_time=202306100900, end_time=202307110900)
 
     # 启动优化器
     optimizer.go(out_marker_file="strategies.json",out_summary_file="total_summary_all.csv")

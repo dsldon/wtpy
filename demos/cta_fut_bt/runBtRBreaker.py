@@ -1,6 +1,6 @@
 from wtpy import WtBtEngine,EngineType
 from wtpy.apps import WtBtAnalyst
-from Strategies.DualThrust import StraDualThrust
+from Strategies.RBreaker import StraRBreaker
 
 def analyze_with_pyfolio(fund_filename:str, capital:float=500000):
     import pyfolio as pf
@@ -28,19 +28,16 @@ if __name__ == "__main__":
     engine = WtBtEngine(EngineType.ET_CTA)
     engine.init('../common/', "configbt.yaml")
    
-
-    straInfo = StraDualThrust(name='py_dce_i', code="DCE.i.2309", barCnt=30, period="m5", k1=0.5, k2=0.3, slTicks=0, spTicks=0)
-    # straInfo = StraDualThrust(name='py_dce_y', code="DCE.y.2309", barCnt=30, period="m5", k1=0.1, k2=0.2, slTicks=0, spTicks=0)
-    # straInfo = StraDualThrust(name='py_dce_c', code="DCE.c.2309", barCnt=30, period="m5", k1=0.1, k2=0.3, slTicks=0, spTicks=0)
+    # straInfo = StraRBreaker(name='py_dce_y', code="DCE.y.2309", barCnt=30, period="m5")
+    straInfo = StraRBreaker(name='py_dce_c', code="DCE.c.2309", N=30, period="m5")
     engine.set_cta_strategy(straInfo)
     #开始运行回测
     engine.run_backtest(bAsync=False)
     #创建绩效分析模块
     analyst = WtBtAnalyst()
     #将回测的输出数据目录传递给绩效分析模块
-    analyst.add_strategy('py_dce_i', folder="./outputs_bt/", init_capital=50000, rf=0.02, annual_trading_days=240)
     # analyst.add_strategy('py_dce_y', folder="./outputs_bt/", init_capital=50000, rf=0.02, annual_trading_days=240)
-    # analyst.add_strategy('py_dce_c', folder="./outputs_bt/", init_capital=50000, rf=0.02, annual_trading_days=240)
+    analyst.add_strategy('py_dce_c', folder="./outputs_bt/", init_capital=50000, rf=0.02, annual_trading_days=240)
     #运行绩效模块
     analyst.run_new()
   

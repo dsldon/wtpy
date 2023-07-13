@@ -84,9 +84,9 @@
             "category": 1,
             "trademode": 0,
             "precision": 2,
-            "pricetick": 0.005,
+            "pricetick": 0.01,
             "volscale": 10000,
-            "name": "30年债",
+            "name": "30年期国债期货",
             "exchg": "CFFEX",
             "session": "FD0915",
             "holiday": "CHINA"

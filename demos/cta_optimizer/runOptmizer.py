@@ -111,5 +111,7 @@ def runStopAllOptimizer():
 
 
 if __name__ == "__main__":
-    runBaseOptimizer()
+    # runBaseOptimizer()
+    # runStopLossOptimizer()
+    runStopAllOptimizer()
     kw = input('press any key to exit\n')
