@@ -3865,6 +3865,13 @@
                 "newclose": 6463.0,
                 "oldclose": 6642.0,
                 "to": "SR401"
+            },
+            {
+                "date": 20230711,
+                "from": "SR401",
+                "newclose": 6388.0,
+                "oldclose": 6486.0,
+                "to": "SR403"
             }
         ],
         "TA": [
@@ -4992,6 +4999,13 @@
                 "newclose": 4008.0,
                 "oldclose": 4036.0,
                 "to": "b2309"
+            },
+            {
+                "date": 20230714,
+                "from": "b2309",
+                "newclose": 4523.0,
+                "oldclose": 4551.0,
+                "to": "b2310"
             }
         ],
         "bb": [
@@ -6057,6 +6071,13 @@
                 "newclose": 7647.0,
                 "oldclose": 7725.0,
                 "to": "eb2309"
+            },
+            {
+                "date": 20230712,
+                "from": "eb2309",
+                "newclose": 7441.0,
+                "oldclose": 7484.0,
+                "to": "eb2310"
             }
         ],
         "eg": [
@@ -9409,6 +9430,13 @@
                 "newclose": 527.0,
                 "oldclose": 526.6,
                 "to": "sc2309"
+            },
+            {
+                "date": 20230712,
+                "from": "sc2309",
+                "newclose": 563.7,
+                "oldclose": 567.0,
+                "to": "sc2310"
             }
         ]
     },
@@ -9637,6 +9665,13 @@
                 "newclose": 5482.0,
                 "oldclose": 5449.0,
                 "to": "ag2312"
+            },
+            {
+                "date": 20230704,
+                "from": "ag2312",
+                "newclose": 5540.0,
+                "oldclose": 5531.0,
+                "to": "ag2401"
             }
         ],
         "al": [
@@ -10716,6 +10751,13 @@
                 "newclose": 58870.0,
                 "oldclose": 59070.0,
                 "to": "bc2310"
+            },
+            {
+                "date": 20230707,
+                "from": "bc2310",
+                "newclose": 59870.0,
+                "oldclose": 60090.0,
+                "to": "bc2311"
             }
         ],
         "bu": [
@@ -14119,6 +14161,13 @@
                 "newclose": 527.0,
                 "oldclose": 526.6,
                 "to": "sc2309"
+            },
+            {
+                "date": 20230712,
+                "from": "sc2309",
+                "newclose": 563.7,
+                "oldclose": 567.0,
+                "to": "sc2310"
             }
         ],
         "sn": [
