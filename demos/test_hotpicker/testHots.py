@@ -51,7 +51,7 @@ def daily_hot_rules():
     # 从datakit落地的行情快照直接读取
     # cacher = WtCacheMonSS("./FUT_DATA/his/snapshot/")
 
-    picker = WtHotPicker(hotFile="hots.json", secFile="seconds.json")
+    picker = WtHotPicker(hotFile="../common/hots.json", secFile="../common/seconds.json")
     picker.set_cacher(cacher)
 
     # notifier = WtMailNotifier(user="yourmailaddr", pwd="yourmailpwd", host="smtp.exmail.qq.com", port=465, isSSL=True)
